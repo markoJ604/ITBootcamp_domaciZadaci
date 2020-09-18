@@ -4,11 +4,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,6 +38,8 @@ public class Main {
             Cell firstName = row.getCell(2);
             Cell lastName = row.getCell(3);
             Cell postalCode = row.getCell(4);
+            Cell productInfo = row.getCell(5);
+            Cell taxInfo = row.getCell(6);
             Cell paymentInfo = row.getCell(7);
 
             //LOGIN
@@ -72,6 +72,10 @@ public class Main {
 
             //CHECKOUT
 
+            if (!Checkout.itemDesc(driver).getText().equals(productInfo.getStringCellValue())) System.exit(27);
+            if (!Checkout.tax(driver).getText().equals(taxInfo.getStringCellValue())) System.exit(28);
+            if (!Checkout.paymentInfo(driver).getText().equals(paymentInfo.getStringCellValue())) System.exit(29);
+
             Checkout.finish(driver);
             driver.close();
 
@@ -79,6 +83,10 @@ public class Main {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Nije proslo");
         }
     }
+
+
 }

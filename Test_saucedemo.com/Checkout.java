@@ -3,16 +3,14 @@ package xDomaci21;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class Checkout {
 
     private static WebElement element = null;
 
-    public static Select sort(WebDriver driver) {
-        element = driver.findElement(By.className("product_sort_container"));
-        Select sort = new Select(element);
-        return sort;
+    public static WebElement itemDesc (WebDriver driver){
+        element = driver.findElement(By.id("item_4_title_link"));
+        return element;
     }
 
     public static WebElement paymentInfo(WebDriver driver){
@@ -25,5 +23,8 @@ public class Checkout {
         element.click();
     }
 
-
+    public static WebElement tax (WebDriver driver){
+        element = driver.findElement(By.xpath("//div[@class='summary_tax_label']"));
+        return element;
+    }
 }
